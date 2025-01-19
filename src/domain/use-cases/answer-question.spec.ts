@@ -2,9 +2,7 @@ import { AnswerQuestionUseCase } from './answer-question'
 import { AnswersRepository } from '../repositories/answers-repository'
 
 const fakeAnswersRepository: AnswersRepository = {
-  create: async () => {
-    return
-  }
+  create: async () => {},
 }
 
 test('create an answer', async () => {
@@ -13,8 +11,8 @@ test('create an answer', async () => {
   const answer = await answerQuestion.execute({
     instructorId: '1',
     questionId: '1',
-    content: "Nova resposta"
+    content: 'Nova resposta',
   })
 
-  expect(answer.content).toEqual("Nova resposta")
+  expect(answer.content).toEqual('Nova resposta')
 })
