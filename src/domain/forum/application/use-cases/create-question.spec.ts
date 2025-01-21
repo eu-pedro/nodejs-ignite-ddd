@@ -1,10 +1,9 @@
-import { AnswerQuestionUseCase } from './answer-question'
-import { AnswersRepository } from '../repositories/answers-repository'
 import { QuestionRepository } from '../repositories/question-repository'
 import { CreateQuestionUseCase } from './create-question'
+import { Question } from '../../enterprise/entities/question'
 
 const fakeQuestionsRepository: QuestionRepository = {
-  create: async () => {},
+  create: async (question: Question) => {},
 }
 
 test('create a question', async () => {
