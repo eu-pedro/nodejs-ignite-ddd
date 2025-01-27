@@ -26,7 +26,6 @@ describe('Delete Question', () => {
       authorId: 'author-1',
     })
 
-    console.log(inMemoryQuestionsRepository.items)
 
     expect(inMemoryQuestionsRepository.items).toHaveLength(0)
   })
@@ -39,7 +38,7 @@ describe('Delete Question', () => {
 
     inMemoryQuestionsRepository.create(newQuestion)
 
-   expect(async () => {
+   await expect(async () => {
     return sut.execute({
       questionId: 'question-1',
       authorId: 'author-2',
