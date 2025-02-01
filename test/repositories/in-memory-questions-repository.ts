@@ -1,9 +1,9 @@
 import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { PaginationParams } from "@/core/repositories/pagination-params";
-import { QuestionRepository } from "@/domain/forum/application/repositories/questions-repository";
+import { QuestionsRepository } from "@/domain/forum/application/repositories/questions-repository";
 import { Question } from "@/domain/forum/enterprise/entities/question";
 
-export class InMemoryQuestionsRepository implements QuestionRepository {
+export class InMemoryQuestionsRepository implements QuestionsRepository {
   async findBySlug(slug: string): Promise<Question | null> {
     const question = this.items.find((item) => item.slug.value === slug)
 

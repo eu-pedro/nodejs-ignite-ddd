@@ -1,11 +1,11 @@
 import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository'
 import { makeQuestion } from 'test/factories/make-question'
-import { InMemoryQuestionCommentsRepository } from 'test/repositories/in-memory-question-comments-repository'
+import { InMemoryQuestionsCommentsRepository } from 'test/repositories/in-memory-question-comments-repository'
 import { CommentOnQuestionUseCase } from './comment-on-question'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 
 
-let inMemoryQuestionCommentsRepository: InMemoryQuestionCommentsRepository
+let inMemoryQuestionsCommentsRepository: InMemoryQuestionsCommentsRepository
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository
 let sut: CommentOnQuestionUseCase
 
@@ -13,10 +13,10 @@ describe('Comment on Question', () => {
 
   beforeEach(() => {
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository()
-    inMemoryQuestionCommentsRepository = new InMemoryQuestionCommentsRepository()
+    inMemoryQuestionsCommentsRepository = new InMemoryQuestionsCommentsRepository()
     sut = new CommentOnQuestionUseCase(
       inMemoryQuestionsRepository,
-      inMemoryQuestionCommentsRepository
+      inMemoryQuestionsCommentsRepository
     )
   })
 
@@ -27,8 +27,6 @@ describe('Comment on Question', () => {
 
     await inMemoryQuestionsRepository.create(question)
 
-
-
     await sut.execute({
       questionId: question.id.toString(),
       authorId: question.authorId.toString(),
@@ -36,7 +34,7 @@ describe('Comment on Question', () => {
     })
 
 
-    expect(inMemoryQuestionCommentsRepository.items[0].content).toEqual('Comentário teste')
+    expect(inMemoryQuestionsCommentsRepository.items[0].content).toEqual('Comentário teste')
   })
 
   it('not should be able to comment on question if question not found', async () => {
