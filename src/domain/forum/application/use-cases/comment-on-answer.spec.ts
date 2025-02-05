@@ -29,7 +29,9 @@ describe('Comment on Answer', () => {
       authorId: answer.authorId.toString(),
       content: 'Comentário teste'
     })
-    
-    expect(inMemoryAnswerCommentsRepository.items[0].content).toEqual('Comentário teste')
+
+    expect(inMemoryAnswerCommentsRepository.items[0].content).toEqual(
+      'Comentário teste',
+    )
   })
 })

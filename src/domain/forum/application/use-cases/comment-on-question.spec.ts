@@ -3,6 +3,7 @@ import { makeQuestion } from 'test/factories/make-question'
 import { InMemoryQuestionsCommentsRepository } from 'test/repositories/in-memory-question-comments-repository'
 import { CommentOnQuestionUseCase } from './comment-on-question'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 
 let inMemoryQuestionsCommentsRepository: InMemoryQuestionsCommentsRepository
@@ -42,13 +43,13 @@ describe('Comment on Question', () => {
 
     await inMemoryQuestionsRepository.create(question)
 
-    await expect(async () => {
-      return await sut.execute({
-        authorId: question.authorId.toString(),
-        content: question.content,
-        questionId: 'question-2'
-      })
-    
-    }).rejects.toBeInstanceOf(Error)
+    const result = await sut.execute({
+      authorId: question.authorId.toString(),
+      content: question.content,
+      questionId: 'question-2'
+    })
+
+    expect(result.isLeft()).toBe(true)
+    expect(result.value).toBeInstanceOf(ResourceNotFoundError)
   })
 })
